@@ -14,22 +14,17 @@ MongoClient.connect(
     }
     const db = client.db(databaseName);
 
-    db.collection("tasks")
-      .find({ completed: false })
-      .toArray((error, tasks) => {
-        if (error) {
-          return console.log("Error occured");
-        }
-        console.log(tasks);
-      });
-    db.collection("tasks").findOne(
-      { _id: new ObjectId("61c2e537db10aaa85308843f") },
-      (error, result) => {
-        if (error) {
-          return console.log("Error occured");
-        }
-        console.log(result);
+    db.collection("tasks").updateMany(
+      {
+        completed: false
+      },
+      {
+        $set: {completed: true}
       }
-    );
+    ).then((result) => {
+      console.log(result)
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 );
