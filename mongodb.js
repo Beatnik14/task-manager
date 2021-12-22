@@ -14,17 +14,16 @@ MongoClient.connect(
     }
     const db = client.db(databaseName);
 
-    db.collection("tasks").updateMany(
-      {
-        completed: false
-      },
-      {
-        $set: {completed: true}
-      }
-    ).then((result) => {
-      console.log(result)
-    }).catch((error) => {
-      console.log(error)
-    })
+    db.collection("tasks")
+      .deleteOne({
+        description: "Work Out",
+        completed: true
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 );
