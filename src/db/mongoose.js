@@ -13,7 +13,7 @@ const User = mongoose.model("User", {
   },
 });
 
-const me = new User({ name: "Saba", age: 22 });
+const me = new User({ name: "Saba", age: 24 });
 
 me.save()
   .then(() => {
